@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">GrowingPig</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="headerHomeFragment">You need xxxxx to achieve your goal. Everyday is a progress. Good luck!</string>
+    <string name="wantHomeFragment">I want a/an: </string>
+    <string name="sacrificeFragment">Things you are willing to sacrifice today:</string>
+    <string name="savings">Savings</string>
+    <string name="goal">Goal</string>
+    <string name="amount">$XXXXX</string>
+    <string name="modify">Modify</string>
+    <string name="reason">Tell yourself: Why I save? For what?
+        Think about the benefits and the bad things that may happen if you don´t save for a certain goal.
+        Write them and read it each day: </string>
+    <string name="incomings">Incomings</string>
+    <string name="outcomings">Outcomings</string>
+    <string name="balance">Balance</string>
+    <string name="motivation">STRATEGY + WILL + YOUR REASONS = SUCCESS</string>
+    <string name="bt_text">TAP HERE TO CHANGE YOUR MAIN PHRASE</string>
+    <string name="taskTitle">Title</string>
+    <string name="taskPriority">Priority</string>
+    <string name="bt_addTask">Add Task</string>
+    <string name="user">User</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signUp">Sign Up</string>
+    <string name="signIn">Sign In</string>
+    <string name="login">Log in</string>
+    <string name="keepConnect">Keep Connect</string>
+    <string name="newTask">New Task</string>
+    <string name="hello">Hello </string>
+</resources>

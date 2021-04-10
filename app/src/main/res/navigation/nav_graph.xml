@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navHomeFragment">
+
+    <fragment
+        android:id="@+id/navHomeFragment"
+        android:name="com.example.growingpig.view.ui.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_progressFragment"
+            app:destination="@id/navProgressFragment" />
+        <action
+            android:id="@+id/action_navHomeFragment_to_addTaskFragmentDialog"
+            app:destination="@id/addTaskFragmentDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/navProgressFragment"
+        android:name="com.example.growingpig.view.ui.fragments.ProgressFragment"
+        android:label="fragment_progress"
+        tools:layout="@layout/fragment_progress" >
+        <action
+            android:id="@+id/action_progressFragment_to_motivationFragment"
+            app:destination="@id/navMotivationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navMotivationFragment"
+        android:name="com.example.growingpig.view.ui.fragments.MotivationFragment"
+        android:label="fragment_motivation"
+        tools:layout="@layout/fragment_motivation" >
+        <action
+            android:id="@+id/action_motivationFragment_to_profileFragment"
+            app:destination="@id/navProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navProfileFragment"
+        android:name="com.example.growingpig.view.ui.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
+
+
+    <dialog
+        android:id="@+id/addTaskFragmentDialog"
+        android:name="com.example.growingpig.view.ui.fragments.AddTaskDialogFragment"
+        android:label="AddTaskFragmentDialog"
+        tools:layout="@layout/fragment_add_task_dialog"
+
+    >
+
+    </dialog>
+</navigation>
