@@ -29,4 +29,5 @@
     <string name="keepConnect">Keep Connect</string>
     <string name="newTask">New Task</string>
     <string name="hello">Hello </string>
+    <string name="verifyInput">Verifica los datos ingresados</string>
 </resources>

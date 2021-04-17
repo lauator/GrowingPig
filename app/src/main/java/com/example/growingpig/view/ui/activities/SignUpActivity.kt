@@ -15,14 +15,17 @@ class SignUpActivity : AppCompatActivity() {
      de que no es la mejor forma de guardar datos sensibles, pero como la app no guarda informacion tan importante
      es tolerable
      */
+companion object
+    {
+        val SHARED_PREFS_NAME = "PREFS"
 
-    val SHARED_PREFS_NAME = "PREFS"
+        val KEY_SHARED_PREFS_EMAIL = "KEY_SHARED_PREFS_EMAIL"
+        val KEY_SHARED_PREFS_PASSWORD = "KEY_SHARED_PREFS_PASSWORD"
 
-    val KEY_SHARED_PREFS_EMAIL = "KEY_SHARED_PREFS_EMAIL"
-    val KEY_SHARED_PREFS_PASSWORD = "KEY_SHARED_PREFS_PASSWORD"
+        val EXTRA_NAME = "EXTRA_NAME"
+        val EXTRA_EMAIL = "EXTRA_EMAIL"
+    }
 
-    val EXTRA_NAME = "EXTRA_NAME"
-    val EXTRA_EMAIL = "EXTRA_EMAIL"
 
     private lateinit var binding: ActivitySignUpBinding
 
