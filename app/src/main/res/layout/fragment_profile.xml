@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_incomings"
-                    android:text="0"
+                    android:text="@string/zero"
                     android:textAlignment="center"
                     android:textSize="24dp"
                     android:layout_marginTop="10dp"
@@ -79,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_outcomings"
-                    android:text="0"
+                    android:text="@string/zero"
                     android:textAlignment="center"
                     android:textSize="24dp"
                     android:layout_marginTop="10dp"
@@ -113,7 +113,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_balance"
-                    android:text="0"
+                    android:text="@string/zero"
                     android:textAlignment="center"
                     android:textSize="24dp"
                     android:layout_marginTop="10dp"
@@ -134,19 +134,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/savings"
-                    android:textSize="36dp"
+                    android:textSize="24dp"
                     android:textAlignment="center"
+                    android:layout_marginTop="20dp"
                     />
 
                 <TextView
                     android:id="@+id/tv_savingsAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/amount"
+                    android:text="@string/zero"
                     android:layout_below="@+id/tv_savings"
                     android:textSize="24dp"
                     android:textAlignment="center"
-                    android:padding="15dp"
+                    android:layout_marginTop="10dp"
+
                     />
 
                 <Button
@@ -157,6 +159,7 @@
                     android:text="@string/modify"
                     android:layout_marginEnd="30dp"
                     android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/shape_button"
                     >
@@ -169,20 +172,21 @@
                     android:layout_height="wrap_content"
                     android:text="@string/goal"
                     android:layout_below="@+id/btn_savingsModify"
-                    android:textSize="36dp"
+                    android:textSize="24dp"
                     android:textAlignment="center"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     />
 
                 <TextView
                     android:id="@+id/tv_goalAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/amount"
+                    android:text="@string/zero"
                     android:layout_below="@+id/tv_goal"
                     android:textSize="24dp"
                     android:textAlignment="center"
-                    android:padding="15dp"
+                    android:layout_marginTop="10dp"
+
                     />
 
                 <Button
@@ -191,6 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_goalAmount"
                     android:text="@string/modify"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="30dp"
                     android:layout_marginStart="30dp"
                     android:layout_centerHorizontal="true"
@@ -198,6 +203,29 @@
                     >
 
                 </Button>
+
+                <TextView
+                    android:id="@+id/tv_need"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/need"
+                    android:layout_below="@+id/btn_goalModify"
+                    android:layout_marginTop="10dp"
+                    android:textSize="24dp"
+                    android:textAlignment="center"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_needAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:layout_below="@+id/tv_need"
+                    android:layout_marginTop="10dp"
+                    android:textSize="24dp"
+                    android:textAlignment="center"
+                    />
+
 
             </RelativeLayout>
 
@@ -216,12 +244,17 @@
             android:layout_height="0dp"
             android:layout_weight="0.25"
             app:boxBackgroundMode="outline"
-            android:hint="Why i do this?"
+            android:hint="@string/why"
+
             >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/whyParagraph"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textColor="@color/colorSecondaryDark"
+            android:textSize="19dp"
+
 
             />
 

@@ -9,7 +9,8 @@
     <color name="yellowLight">#ffffcf</color>
 
 
-    <color name="lightBlue">#90caf9</color>
-    <color name="lightBluedark">#5d99c6</color>
+    <color name="colorSecondary">#90caf9</color>
+    <color name="colorSecondaryDark">#5d99c6</color>
     <color name="lightBluelight">#c3fdff</color>
+
 </resources>

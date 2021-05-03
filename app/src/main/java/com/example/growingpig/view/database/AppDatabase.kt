@@ -7,25 +7,24 @@ import androidx.room.RoomDatabase
 import com.example.growingpig.model.Task
 
 @Database(entities = arrayOf(Task::class), version = 1)
-abstract class TaskDB: RoomDatabase() {
+abstract class AppDatabase: RoomDatabase() {
 
     abstract fun taskDAO(): TaskDAO
 
     companion object{
         private lateinit var context: Context
-        private val database: TaskDB  by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
-            Room.databaseBuilder(context, TaskDB::class.java, "task.db")
+        private val dB: AppDatabase  by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
+            Room.databaseBuilder(context, AppDatabase::class.java, "task.db")
                 .allowMainThreadQueries()
                 .build()
         }
 
-        fun getDatabase(context: Context): TaskDB{
+        fun getDatabase(context: Context): AppDatabase{
             Companion.context = context.applicationContext
-            return database
+            return dB
         }
 
         }
     }
 
 
-}
