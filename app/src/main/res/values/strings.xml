@@ -30,10 +30,15 @@
     <string name="newTask">New Task</string>
     <string name="hello">Hello </string>
     <string name="verifyInput">Verifica los datos ingresados</string>
-    <string name="zero">$0</string>
+    <string name="zero">0</string>
     <string name="why">Why I do this?</string>
     <string name="need">You need:</string>
     <string name="update">Update</string>
     <string name="cancel">Cancel</string>
     <string name="value">Insert value</string>
+    <string name="currencySymbol">$</string>
+    <string name="condition">If you add all your balance to your savings, in:</string>
+    <string name="months">months</string>
+    <string name="reach"> You will reach your goal!</string>
+
 </resources>

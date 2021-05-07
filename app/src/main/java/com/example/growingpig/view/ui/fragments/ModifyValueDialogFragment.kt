@@ -1,33 +1,22 @@
 package com.example.growingpig.view.ui.fragments
 
-import android.app.Activity
+
+
+
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.EditText
-import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.setFragmentResult
 import com.example.growingpig.R
 import com.example.growingpig.databinding.DialogModifyValueBinding
-import java.lang.ClassCastException
-
 import java.lang.IllegalStateException
 
 
 
-private lateinit var binding: DialogModifyValueBinding
-
 
 class ModifyValueDialogFragment: DialogFragment() {
 
-
+    private lateinit var binding: DialogModifyValueBinding
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -38,48 +27,39 @@ class ModifyValueDialogFragment: DialogFragment() {
 
             val inflater = requireActivity().layoutInflater
 
-            var view = inflater.inflate(R.layout.dialog_modify_value, null)
+            val view = inflater.inflate(R.layout.dialog_modify_value, null)
 
             binding = DialogModifyValueBinding.bind(view)
 
 
-
-
-
-            //TODO pasarle cosas al builder para construir mi alertDialog (android devs)
             builder.setView(view)
 
-                    .setPositiveButton(R.string.update,
-                            DialogInterface.OnClickListener(){ dialog, id ->
+                    .setPositiveButton(R.string.update
+                    ) { _, _ ->
 
 
-                                val etValue = binding.tvValue.text.toString()
+                        val etValue = binding.tvValue.text.toString()
 
-                                parentFragmentManager.setFragmentResult("keyI", bundleOf("incoming" to etValue))
-                                parentFragmentManager.setFragmentResult("keyO", bundleOf("outcoming" to etValue))
-
-
-
-
-
+                        val bundle = Bundle()
+                        bundle.putString("incoming", etValue)
+                        bundle.putString("outgoings", etValue)
+                        bundle.putString("saving", etValue)
+                        bundle.putString("goal", etValue)
 
 
-                                getDialog()?.dismiss()
+                        parentFragmentManager.setFragmentResult("key", bundle)
 
 
+                        dialog?.dismiss()
 
-                    })
+                    }
 
-                    .setNegativeButton(R.string.cancel,
-                            DialogInterface.OnClickListener(){ dialog, id ->
+                .setNegativeButton(R.string.cancel
+                ) { _, _ ->
 
-                        getDialog()?.cancel()
+                    dialog?.cancel()
 
-
-
-                    })
-
-
+                }
 
 
             builder.create()
