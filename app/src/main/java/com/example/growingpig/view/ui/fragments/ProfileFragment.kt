@@ -1,6 +1,8 @@
 package com.example.growingpig.view.ui.fragments
 
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,12 +21,15 @@ import com.google.android.material.textfield.TextInputEditText
 private lateinit var whyParagraph: TextInputEditText
 class ProfileFragment : Fragment(){
 
+
+
+
     private lateinit var binding: FragmentProfileBinding
 
     private lateinit var tvIncomeAmount: TextView
     private lateinit var tvOutgoingsAmount: TextView
     private lateinit var tvBalanceAmount: TextView
-    private lateinit var tvSavings: TextView
+    private lateinit var tvSavingsAmount: TextView
     private lateinit var tvGoalAmount: TextView
     private lateinit var tvNeed: TextView
     private lateinit var tvTime: TextView
@@ -46,6 +51,7 @@ class ProfileFragment : Fragment(){
     private var saving: Int = 0
     private var balance: Int = 0
     private var need: Int = 0
+    private var time: Int = 0
 
 
 
@@ -56,7 +62,10 @@ class ProfileFragment : Fragment(){
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
+        verifyUserData()
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,7 +76,7 @@ class ProfileFragment : Fragment(){
         tvIncomeAmount = binding.tvIncomingsAmounts
         tvOutgoingsAmount = binding.tvOutcomingsAmount
         tvBalanceAmount = binding.tvBalanceAmount
-        tvSavings = binding.tvSavingsAmount
+        tvSavingsAmount = binding.tvSavingsAmount
         tvGoalAmount = binding.tvGoalAmount
         tvNeed = binding.tvNeedAmount
         tvTime = binding.tvTime
@@ -119,6 +128,7 @@ class ProfileFragment : Fragment(){
                         else{
                         tvTime.text = calculateTime().toString()
                         }
+                        saveUserData()
                     }
                     2 -> {
                         resultO = bundle.getString("outgoings", "0")
@@ -130,10 +140,11 @@ class ProfileFragment : Fragment(){
                         else{
                             tvTime.text = calculateTime().toString()
                         }
+                        saveUserData()
                     }
                     3 -> {
                         resultS = bundle.getString("saving", "0")
-                        tvSavings.text = resultS
+                        tvSavingsAmount.text = resultS
                         tvNeed.text = calculateNeed().toString()
                         if(calculateTime() > 99){
                             tvTime.text = "+99"
@@ -141,6 +152,7 @@ class ProfileFragment : Fragment(){
                         else{
                             tvTime.text = calculateTime().toString()
                         }
+                        saveUserData()
                     }
                     4 -> {
                         resultG = bundle.getString("goal", "0")
@@ -152,6 +164,7 @@ class ProfileFragment : Fragment(){
                         else{
                             tvTime.text = calculateTime().toString()
                         }
+                        saveUserData()
                     }
                 }
 
@@ -160,8 +173,36 @@ class ProfileFragment : Fragment(){
 
     }
 
+    private fun saveUserData() {
+        val preferences = activity?.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE) ?: return
+        with(preferences.edit()){
+            putInt(getString(R.string.income_key), income)
+            putInt(getString(R.string.out_goings_key), outgoings)
+            putInt(getString(R.string.balance_key), balance)
+            putInt(getString(R.string.savings_key), saving)
+            putInt(getString(R.string.goal_key), goal)
+            putInt(getString(R.string.need_key), need)
+            putInt(getString(R.string.time_key), time)
 
-    //TODO guardarlos en el Shared Preferences
+            apply()
+        }
+
+    }
+
+    private fun verifyUserData() {
+        val preferences = activity?.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE) ?: return
+
+        tvIncomeAmount.text = preferences.getInt(getString(R.string.income_key), 0).toString()
+        tvOutgoingsAmount.text = preferences.getInt(getString(R.string.out_goings_key), 0).toString()
+        tvBalanceAmount.text = preferences.getInt(getString(R.string.balance_key), 0).toString()
+        tvSavingsAmount.text = preferences.getInt(getString(R.string.savings_key), 0).toString()
+        tvGoalAmount.text = preferences.getInt(getString(R.string.goal_key), 0).toString()
+        tvNeed.text = preferences.getInt(getString(R.string.need_key), 0).toString()
+
+    }
+
+
+
 
 
     private fun showModifyDialog(){
@@ -183,7 +224,7 @@ class ProfileFragment : Fragment(){
 
     private fun calculateNeed() : Int {
          goal =  tvGoalAmount.text.toString().toInt()
-         saving =  tvSavings.text.toString().toInt()
+         saving =  tvSavingsAmount.text.toString().toInt()
 
         need =  goal - saving
 
@@ -193,7 +234,7 @@ class ProfileFragment : Fragment(){
 
     private fun calculateTime(): Int {
 
-        var time = 0
+        time = 0
 
             if(balance != 0){
         time = need / balance
