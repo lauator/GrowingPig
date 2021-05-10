@@ -27,7 +27,7 @@ private lateinit var test: EditText
 
 class AddTaskDialogFragment: DialogFragment() {
 
-
+//TODO hacer funcionar este fragment
 
      //val app = activity?.applicationContext as TaskApp
 
@@ -42,8 +42,6 @@ class AddTaskDialogFragment: DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        //para obtener el contexto de un fragment
-         //appContext = requireContext().applicationContext
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_task_dialog, container, false)
@@ -65,7 +63,7 @@ class AddTaskDialogFragment: DialogFragment() {
     }
 
     private fun onClickAddTask() {
-        if(userInputValid())
+        if(!userInputValid())
         {
             Toast.makeText(activity, getString(R.string.verifyInput), Toast.LENGTH_SHORT).show()
             return
@@ -89,9 +87,11 @@ class AddTaskDialogFragment: DialogFragment() {
 
     }
 
+
     private fun createTask(title: String, priority: String): Task {
         return Task(title, priority)
     }
+
 
     private fun saveTask(task: Task) {
 

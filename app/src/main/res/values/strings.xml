@@ -49,6 +49,7 @@
     <string name="need_key">NEED_KEY</string>
     <string name="time_key">TIME_KEY</string>
     <string name="motivationText">Insert your motivation text</string>
+    <string name="addNewTask">Add a new task</string>
 
 
 </resources>

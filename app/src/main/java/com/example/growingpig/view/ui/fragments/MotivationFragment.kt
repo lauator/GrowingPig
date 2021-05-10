@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.growingpig.R
 import com.example.growingpig.databinding.FragmentMotivationBinding
+import com.example.growingpig.view.adapter.ViewPagerAdapter
 import com.squareup.picasso.Picasso
 import java.util.*
 import kotlin.concurrent.timerTask
@@ -23,11 +24,13 @@ class MotivationFragment : Fragment() {
 
     private lateinit var binding: FragmentMotivationBinding
 
-    private  lateinit  var imageSwitcher: ImageSwitcher
-
     private lateinit var btnModifyText : Button
 
     private lateinit var tvTextMotivation: TextView
+
+    private val imageUrls =
+        arrayListOf("https://images.pexels.com/photos/3077882/pexels-photo-3077882.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+            , "https://images.pexels.com/photos/584179/pexels-photo-584179.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
 
 
 
@@ -45,58 +48,25 @@ class MotivationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMotivationBinding.bind(view)
 
-        imageSwitcher  = binding.imageSwitcher
+
         btnModifyText = binding.btnTextModify
         tvTextMotivation = binding.tvMotivation
+
+        val viewPager = binding.viewPager
+        val viewPagerAdapter = ViewPagerAdapter(requireActivity().applicationContext, imageUrls)
+        viewPager.adapter = viewPagerAdapter
+
+
 
         btnModifyText.setOnClickListener {
             modifytext()
         }
 
 
-
-
-
-
-        val images = intArrayOf(R.drawable.lion, R.drawable.dados)
-
-
-         imageSwitcher?.setFactory {
-             val imgView = ImageView(activity?.applicationContext)
-             imgView.scaleType = ImageView.ScaleType.CENTER_CROP
-             imgView
-         }
-
-
-        val fadeIn = AnimationUtils.loadAnimation(activity?.applicationContext, R.anim.fade_in )
-        val fadeOut = AnimationUtils.loadAnimation(activity?.applicationContext, R.anim.fade_out)
-        imageSwitcher.setInAnimation(fadeIn)
-        imageSwitcher.setOutAnimation(fadeOut)
-
-        startSlider(images)
-
     }
 
 
-    private fun startSlider(images: IntArray) {
-        var position = 0
-        val DURATION: Long = 9000
 
-        Timer().scheduleAtFixedRate(timerTask {
-            activity?.runOnUiThread(Runnable {
-
-                imageSwitcher?.setImageResource(images[position])
-                position++
-                if(position == images.size) position = 0
-
-            })
-
-
-        },0,DURATION)
-
-        if(position == images.size){position = 0}
-
-    }
 
 
 

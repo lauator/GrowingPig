@@ -11,7 +11,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
         android:layout_height="wrap_content"
-        android:hint="@string/motivationText"
+        android:hint="@string/value"
         android:layout_centerInParent="true"
         android:textAlignment="center"
         android:maxLength="40"
