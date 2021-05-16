@@ -2,65 +2,77 @@ package com.example.growingpig.view.ui.fragments
 
 
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.lifecycleScope
 import com.example.growingpig.R
-import com.example.growingpig.databinding.FragmentAddTaskDialogBinding
+import com.example.growingpig.databinding.DialogAddTaskBinding
 import com.example.growingpig.model.Task
-import com.example.growingpig.view.database.TaskApp
-import kotlinx.coroutines.launch
-
-
-private lateinit var binding: FragmentAddTaskDialogBinding
-
-private lateinit var title: String
-private lateinit var priority: String
-private lateinit var test: EditText
-
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.CompletableObserver
+import io.reactivex.rxjava3.core.CompletableOnSubscribe
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.disposables.Disposable
+import java.lang.IllegalStateException
 
 
 class AddTaskDialogFragment: DialogFragment() {
 
+    private lateinit var binding: DialogAddTaskBinding
+
+    private lateinit var title: String
+    private lateinit var priority: String
+    private lateinit var test: EditText
+
+
 //TODO hacer funcionar este fragment
 
-     //val app = activity?.applicationContext as TaskApp
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.FullScreenDialogStyle)
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return activity?.let{
+            val builder = AlertDialog.Builder(it)
+
+            val inflater = requireActivity().layoutInflater
+
+            val view = inflater.inflate(R.layout.dialog_add_task, null)
+
+            binding = DialogAddTaskBinding.bind(view)
+
+
+
+
+            binding.btnAddTask.setOnClickListener()
+            {
+                title = binding.etTaskTitle.text.toString()
+                priority = binding.etTaskPriority.text.toString()
+                onClickAddTask()
+            }
+
+            binding.ivClose.setOnClickListener {
+                dialog?.cancel()
+            }
+
+
+            builder.setView(view)
+
+
+
+
+
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
+
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
 
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_task_dialog, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding = FragmentAddTaskDialogBinding.bind(view)
-
-        title = binding.etTaskTitle.text.toString()
-        priority = binding.etTaskPriority.text.toString()
-
-
-        binding.btnAddTask.setOnClickListener()
-        {
-            onClickAddTask()
-        }
-
-    }
 
     private fun onClickAddTask() {
         if(!userInputValid())
@@ -72,6 +84,9 @@ class AddTaskDialogFragment: DialogFragment() {
         var task: Task = createTask(title, priority)
 
         saveTask(task)
+
+        Toast.makeText(activity, getString(R.string.taskCreated), Toast.LENGTH_SHORT).show()
+
 
     }
 
@@ -97,7 +112,6 @@ class AddTaskDialogFragment: DialogFragment() {
 
 //TODO revisar porque no funciona esto
 /*
-
         lifecycleScope.launch(){
             app.room.taskDAO().createTask(task)
             var result  = app.room.taskDAO().getAllTasks().size
@@ -106,15 +120,9 @@ class AddTaskDialogFragment: DialogFragment() {
 */
 
 
+
     }
 
-//Esto permite que se muestre como DialogFragment
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-    }
+
 
 }

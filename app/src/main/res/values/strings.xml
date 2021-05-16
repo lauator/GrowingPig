@@ -29,7 +29,7 @@
     <string name="keepConnect">Keep Connect</string>
     <string name="newTask">New Task</string>
     <string name="hello">Hello </string>
-    <string name="verifyInput">Verifica los datos ingresados</string>
+    <string name="verifyInput">Verify the empty inputs </string>
     <string name="zero">0</string>
     <string name="why">Why I do this?</string>
     <string name="need">You need:</string>
@@ -50,6 +50,7 @@
     <string name="time_key">TIME_KEY</string>
     <string name="motivationText">Insert your motivation text</string>
     <string name="addNewTask">Add a new task</string>
+    <string name="taskCreated">Your Task have been created!</string>
 
 
 </resources>

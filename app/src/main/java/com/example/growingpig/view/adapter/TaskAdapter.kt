@@ -11,7 +11,6 @@ import com.example.growingpig.model.Task
 class TaskAdapter(private val tasks: ArrayList<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
 
-
     class TaskViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
        // val cbTask = itemView.findViewById<CheckBox>(R.id.cb_keepConnect)
         val tvTitle = itemView.findViewById<TextView>(R.id.tv_title)
