@@ -5,37 +5,32 @@ package com.example.growingpig.view.ui.fragments
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
 import com.example.growingpig.R
 import com.example.growingpig.databinding.DialogAddTaskBinding
 import com.example.growingpig.model.Task
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.CompletableObserver
-import io.reactivex.rxjava3.core.CompletableOnSubscribe
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.disposables.Disposable
+import com.example.growingpig.view.database.AppDatabase
+
+
+import kotlinx.coroutines.launch
 import java.lang.IllegalStateException
 
 
-class AddTaskDialogFragment: DialogFragment() {
+class AddTaskDialogFragment: DialogFragment(){
 
     private lateinit var binding: DialogAddTaskBinding
 
     private lateinit var title: String
     private lateinit var priority: String
-    private lateinit var test: EditText
-
-
-//TODO hacer funcionar este fragment
 
 
 
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let{
             val builder = AlertDialog.Builder(it)
 
@@ -47,12 +42,15 @@ class AddTaskDialogFragment: DialogFragment() {
 
 
 
-
             binding.btnAddTask.setOnClickListener()
             {
                 title = binding.etTaskTitle.text.toString()
                 priority = binding.etTaskPriority.text.toString()
                 onClickAddTask()
+
+                dialog?.dismiss()
+
+
             }
 
             binding.ivClose.setOnClickListener {
@@ -61,9 +59,6 @@ class AddTaskDialogFragment: DialogFragment() {
 
 
             builder.setView(view)
-
-
-
 
 
             builder.create()
@@ -81,9 +76,12 @@ class AddTaskDialogFragment: DialogFragment() {
             return
         }
 
-        var task: Task = createTask(title, priority)
+        val task = createTask(title, priority)
 
-        saveTask(task)
+       saveTask(task)
+
+        parentFragmentManager.setFragmentResult("dataChanged", bundleOf("OK" to true))
+
 
         Toast.makeText(activity, getString(R.string.taskCreated), Toast.LENGTH_SHORT).show()
 
@@ -108,16 +106,18 @@ class AddTaskDialogFragment: DialogFragment() {
     }
 
 
-    private fun saveTask(task: Task) {
+  private fun saveTask(task: Task) {
+      lifecycleScope.launch {
+          context?.let {
 
-//TODO revisar porque no funciona esto
-/*
-        lifecycleScope.launch(){
-            app.room.taskDAO().createTask(task)
-            var result  = app.room.taskDAO().getAllTasks().size
+              val room = Room
+                  .databaseBuilder(it, AppDatabase::class.java, "tasks")
+                  .build()
 
-        }
-*/
+              room.taskDAO().createTask(task)
+
+          }
+      }
 
 
 

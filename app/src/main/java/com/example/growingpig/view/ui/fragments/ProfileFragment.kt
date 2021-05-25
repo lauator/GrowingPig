@@ -15,13 +15,13 @@ import com.example.growingpig.databinding.FragmentProfileBinding
 import com.google.android.material.textfield.TextInputEditText
 
 
-
+//TODO optimizar codigo y optimizar xml con un constraint
+//TODO necesito mandar el need hacia el HomeFragment (usar shared preferences)
+//TODO los metodos de calcular los podria meter en una clase calculadora
 
 
 private lateinit var whyParagraph: TextInputEditText
-class ProfileFragment : Fragment(){
-
-
+class ProfileFragment : Fragment(), Dialog{
 
 
     private lateinit var binding: FragmentProfileBinding
@@ -40,11 +40,6 @@ class ProfileFragment : Fragment(){
     private lateinit var btnModifyGoal: Button
 
 
-    private var resultI = ""
-    private var resultO = ""
-    private var resultS = ""
-    private var resultG = ""
-
     private var income: Int = 0
     private var outgoings: Int = 0
     private var goal: Int = 0
@@ -62,13 +57,14 @@ class ProfileFragment : Fragment(){
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
-        verifyUserData()
+
     }
 
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         binding = FragmentProfileBinding.bind(view)
 
@@ -87,8 +83,7 @@ class ProfileFragment : Fragment(){
         btnModifyGoal = binding.btnGoalModify
         btnModifySavings = binding.btnSavingsModify
 
-
-
+        verifyUserData()
 
         btnModifyIncome.setOnClickListener{
             modifyValue(1)
@@ -114,13 +109,12 @@ class ProfileFragment : Fragment(){
     }
 
     private fun modifyValue(value: Int) {
-        showModifyDialog()
+        showDialog()
 
             childFragmentManager.setFragmentResultListener("key", this.viewLifecycleOwner) { _, bundle ->
                 when (value) {
                     1 -> {
-                        resultI = bundle.getString("incoming", "0")
-                        tvIncomeAmount.text = resultI
+                        tvIncomeAmount.text =  bundle.getString("incoming", "0")
                         tvBalanceAmount.text = calculateBalance().toString()
                         if(calculateTime() > 99){
                             tvTime.text = "+99"
@@ -131,8 +125,7 @@ class ProfileFragment : Fragment(){
                         saveUserData()
                     }
                     2 -> {
-                        resultO = bundle.getString("outgoings", "0")
-                        tvOutgoingsAmount.text = resultO
+                        tvOutgoingsAmount.text = bundle.getString("outgoings", "0")
                         tvBalanceAmount.text = calculateBalance().toString()
                         if(calculateTime() > 99){
                             tvTime.text = "+99"
@@ -143,8 +136,7 @@ class ProfileFragment : Fragment(){
                         saveUserData()
                     }
                     3 -> {
-                        resultS = bundle.getString("saving", "0")
-                        tvSavingsAmount.text = resultS
+                        tvSavingsAmount.text = bundle.getString("saving", "0")
                         tvNeed.text = calculateNeed().toString()
                         if(calculateTime() > 99){
                             tvTime.text = "+99"
@@ -155,8 +147,7 @@ class ProfileFragment : Fragment(){
                         saveUserData()
                     }
                     4 -> {
-                        resultG = bundle.getString("goal", "0")
-                        tvGoalAmount.text = resultG
+                        tvGoalAmount.text = bundle.getString("goal", "0")
                         tvNeed.text = calculateNeed().toString()
                         if(calculateTime() > 99){
                             tvTime.text = "+99"
@@ -202,13 +193,13 @@ class ProfileFragment : Fragment(){
     }
 
 
-
-
-
-    private fun showModifyDialog(){
+    override fun showDialog() {
         val dialog = ModifyValueDialogFragment()
         dialog.show(childFragmentManager, "ModifyValueDialogFragment")
     }
+
+
+
 
 
 
@@ -246,6 +237,7 @@ class ProfileFragment : Fragment(){
 
         return time
     }
+
 
 
 

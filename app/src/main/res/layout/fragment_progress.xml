@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".view.ui.fragments.ProgressFragment">
 
-    <fragment
+    <!--<fragment
         android:id="@+id/progress"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"/>-->
 
 </FrameLayout>

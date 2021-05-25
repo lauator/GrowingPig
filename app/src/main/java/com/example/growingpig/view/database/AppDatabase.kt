@@ -6,15 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.growingpig.model.Task
 
-@Database(entities = arrayOf(Task::class), version = 1)
+@Database(entities = [Task::class], version = 1)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun taskDAO(): TaskDAO
 
-    companion object{
+   /* companion object{
+
+
         private lateinit var context: Context
+
         private val dB: AppDatabase  by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
-            Room.databaseBuilder(context, AppDatabase::class.java, "task.db")
+            Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "task.db")
                 .allowMainThreadQueries()
                 .build()
         }
@@ -25,6 +28,9 @@ abstract class AppDatabase: RoomDatabase() {
         }
 
         }
+
+    */
+
     }
 
 

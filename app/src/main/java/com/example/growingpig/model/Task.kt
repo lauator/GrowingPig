@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey
 class Task(title: String, priority: String) {
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+    var id: Int? = null
     var title: String = title
     var priority: String = priority
-    var completed = false
+
 
 
 

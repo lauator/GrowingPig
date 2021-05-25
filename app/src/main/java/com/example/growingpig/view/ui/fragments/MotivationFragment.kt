@@ -1,26 +1,20 @@
 package com.example.growingpig.view.ui.fragments
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.Button
-import android.widget.ImageSwitcher
-import android.widget.ImageView
 import android.widget.TextView
 import com.example.growingpig.R
 import com.example.growingpig.databinding.FragmentMotivationBinding
 import com.example.growingpig.view.adapter.ViewPagerAdapter
-import com.squareup.picasso.Picasso
-import java.util.*
-import kotlin.concurrent.timerTask
 
 
 
 
-class MotivationFragment : Fragment() {
+
+class MotivationFragment : Fragment(), Dialog {
 
     private lateinit var binding: FragmentMotivationBinding
 
@@ -59,25 +53,20 @@ class MotivationFragment : Fragment() {
 
 
         btnModifyText.setOnClickListener {
-            modifytext()
+            modifyText()
         }
-
 
     }
 
 
-
-
-
-
-    private fun modifytext() {
+    private fun modifyText() {
         showDialog()
         childFragmentManager.setFragmentResultListener("textKey", this.viewLifecycleOwner){_, bundle ->
             tvTextMotivation.text = bundle.getString("text", "")
         }
     }
 
-    private fun showDialog() {
+    override fun showDialog() {
         val dialog = ModifyTextDialogFragment()
         dialog.show(childFragmentManager, "ModifyTextDialogFragment")
     }

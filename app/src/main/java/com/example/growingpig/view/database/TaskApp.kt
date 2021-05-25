@@ -5,7 +5,9 @@ import androidx.room.Room
 
 
 class TaskApp : Application() {
-    val room = Room
+
+    val room =
+        Room
         .databaseBuilder(this, AppDatabase::class.java, "tasks")
         .build()
 
