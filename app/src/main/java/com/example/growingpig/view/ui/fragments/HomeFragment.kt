@@ -1,48 +1,57 @@
 package com.example.growingpig.view.ui.fragments
 
-
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
+import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
+
+
+import androidx.lifecycle.Observer
+
+import androidx.lifecycle.ViewModelProvider
+
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
+
 import com.example.growingpig.R
 
 import com.example.growingpig.databinding.FragmentHomeBinding
 import com.example.growingpig.model.Task
 import com.example.growingpig.view.adapter.TaskAdapter
-import com.example.growingpig.view.database.AppDatabase
-
-import io.reactivex.rxjava3.core.*
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.disposables.Disposable
-import kotlinx.coroutines.launch
-
-//TODO hacer que me muestre los datos de la base de datos sin tener que apretar el boton
-//TODO hacer UI mas amigable. Con constraints y con espacio para el need
-//TODO hacer que cuando haga check se elimine la tarea en cuestion
+import com.example.growingpig.view.adapter.TaskListener
+import com.example.growingpig.viewmodel.HomeViewModel
 
 
-
-
-
-class HomeFragment : Fragment(), Dialog {
+class HomeFragment : Fragment(), TaskListener {
 
     private lateinit var binding: FragmentHomeBinding
 
     private lateinit var rvList: RecyclerView
 
-    private lateinit var tasks: List<Task>
 
-    private val compositeDisposable = CompositeDisposable()
+    private lateinit var taskAdapter: TaskAdapter
 
-    //private var need = ""
+    private lateinit var btnAddTask: Button
+
+    private lateinit var title: String
+
+    private lateinit var priority: String
+
+    private lateinit var time: TextView
+
+
+    private val viewModel: HomeViewModel by lazy {
+        ViewModelProvider(this).get(HomeViewModel::class.java)
+    }
+
 
 
 
@@ -51,96 +60,83 @@ class HomeFragment : Fragment(), Dialog {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
-
-        return  inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding = FragmentHomeBinding.bind(view)
 
         rvList = binding.rvList
-        rvList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        val fab = binding.floatingActionButton
+        taskAdapter = TaskAdapter(this)
 
+        btnAddTask = binding.btnAddTask
 
-        fab.setOnClickListener {
+        time = binding.tvZero
+
+        btnAddTask.setOnClickListener {
             addTask()
         }
 
-        /*val preferences = activity?.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE) ?: return
-        need = preferences.getInt(getString(R.string.need_key), 0).toString()*/
 
+
+        rvList.apply {
+            rvList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            rvList.adapter = taskAdapter
+        }
+
+        viewModel.getAllTasksObserver().observe(viewLifecycleOwner, Observer {
+            taskAdapter.setListData(ArrayList(it))
+            taskAdapter.notifyDataSetChanged()
+        })
+
+
+        val preferences = activity?.getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE) ?: return
+        time.text = preferences.getInt(getString(R.string.time_key), 0).toString()
 
 
     }
 
 
     private fun addTask() {
-        showDialog()
+        title = binding.etTitle.text.toString()
+        priority = binding.etPriority.text.toString()
 
-        childFragmentManager.setFragmentResultListener("dataChanged", this.viewLifecycleOwner){_, bundle ->
-            if(bundle.getBoolean("OK")){
-                refreshList()
-            }
+        if (!userInputValid()) {
+            Toast.makeText(activity, getString(R.string.verifyInput), Toast.LENGTH_SHORT).show()
+            return
         }
+
+        val task = createTask(title, priority)
+
+        viewModel.createTask(task)
+
+        Toast.makeText(activity, getString(R.string.taskCreated), Toast.LENGTH_SHORT).show()
+
     }
 
-    override fun showDialog() {
-        val dialog = AddTaskDialogFragment()
-        dialog.show(childFragmentManager, "AddTaskDialogFragment")
+    private fun userInputValid(): Boolean {
+        var inputIsValid = true
+
+        if (title.isEmpty() || priority.isEmpty()) {
+            inputIsValid = false
+        }
+
+        return inputIsValid
+
     }
 
-
-
-
-    private fun refreshList (){
-        Single.create(SingleOnSubscribe<List<Task>> { emitter ->
-
-
-            lifecycleScope.launch {
-                context?.let {
-
-                    val room = Room
-                        .databaseBuilder(it, AppDatabase::class.java, "tasks")
-                        .build()
-
-                    tasks = room.taskDAO().getAllTasks()
-
-                }
-            }
-
-            emitter.onSuccess(tasks)
-
-        })
-
-            .subscribe(object : SingleObserver<List<Task>>{
-                override fun onSubscribe(d: Disposable?) {
-                    compositeDisposable.add(d)
-                }
-
-                override fun onSuccess(t: List<Task>) {
-                    rvList.adapter = TaskAdapter(t)
-                }
-
-                override fun onError(e: Throwable?) {
-                    Log.e("Observer:", "onError", e)
-                }
-
-            }
-
-            )
-    }
-
-    override fun onStop() {
-        compositeDisposable.clear()
-        super.onStop()
+    private fun createTask(title: String, priority: String): Task {
+        return Task(title, priority)
     }
 
 
+    override fun onDeleteTaskClickListener(task: Task) {
+        viewModel.deleteTask(task)
+    }
 
 
 }

@@ -16,9 +16,6 @@
         <action
             android:id="@+id/action_homeFragment_to_progressFragment"
             app:destination="@id/navProgressFragment" />
-        <action
-            android:id="@+id/action_navHomeFragment_to_addTaskFragmentDialog"
-            app:destination="@id/addTaskFragmentDialog" />
 
     </fragment>
 
@@ -48,16 +45,5 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 
-
-
-    <dialog
-        android:id="@+id/addTaskFragmentDialog"
-        android:name="com.example.growingpig.view.ui.fragments.AddTaskDialogFragment"
-        android:label="AddTaskFragmentDialog"
-        tools:layout="@layout/dialog_add_task"
-
-    >
-
-    </dialog>
 
 </navigation>

@@ -1,8 +1,6 @@
 package com.example.growingpig.view.ui.fragments
 
 
-
-
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
@@ -12,9 +10,7 @@ import com.example.growingpig.databinding.DialogModifyValueBinding
 import java.lang.IllegalStateException
 
 
-
-
-class ModifyValueDialogFragment: DialogFragment() {
+class ModifyValueDialogFragment : DialogFragment() {
 
     private lateinit var binding: DialogModifyValueBinding
 
@@ -22,7 +18,7 @@ class ModifyValueDialogFragment: DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
 
-        return activity?.let{
+        return activity?.let {
             val builder = AlertDialog.Builder(it)
 
             val inflater = requireActivity().layoutInflater
@@ -34,27 +30,29 @@ class ModifyValueDialogFragment: DialogFragment() {
 
             builder.setView(view)
 
-                    .setPositiveButton(R.string.update
-                    ) { _, _ ->
+                .setPositiveButton(
+                    R.string.update
+                ) { _, _ ->
 
 
-                        val etValue = binding.tvValue.text.toString()
+                    val etValue = binding.tvValue.text.toString()
 
-                        val bundle = Bundle()
-                        bundle.putString("incoming", etValue)
-                        bundle.putString("outgoings", etValue)
-                        bundle.putString("saving", etValue)
-                        bundle.putString("goal", etValue)
-
-
-                        parentFragmentManager.setFragmentResult("key", bundle)
+                    val bundle = Bundle()
+                    bundle.putString("incoming", etValue)
+                    bundle.putString("outgoings", etValue)
+                    bundle.putString("saving", etValue)
+                    bundle.putString("goal", etValue)
 
 
-                        dialog?.dismiss()
+                    parentFragmentManager.setFragmentResult("key", bundle)
 
-                    }
 
-                .setNegativeButton(R.string.cancel
+                    dialog?.dismiss()
+
+                }
+
+                .setNegativeButton(
+                    R.string.cancel
                 ) { _, _ ->
 
                     dialog?.cancel()
@@ -63,17 +61,9 @@ class ModifyValueDialogFragment: DialogFragment() {
 
 
             builder.create()
-            } ?: throw IllegalStateException("Activity cannot be null")
-
-        }
-
-
-
-
-
-
-
-
-
+        } ?: throw IllegalStateException("Activity cannot be null")
 
     }
+
+
+}

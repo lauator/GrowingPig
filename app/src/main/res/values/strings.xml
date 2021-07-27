@@ -2,12 +2,13 @@
     <string name="app_name">GrowingPig</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="headerHomeFragment">You need xxxxx to achieve your goal. Everyday is a progress. Good luck!</string>
+    <string name="headerHomeFragment"> you will reach your goal </string>
+    <string name="goodLuck">Everyday is a progress. Good luck!</string>
     <string name="wantHomeFragment">I want a/an: </string>
     <string name="sacrificeFragment">Things you are willing to sacrifice today:</string>
     <string name="savings">Savings</string>
+    <string name="need">Need</string>
     <string name="goal">Goal</string>
-    <string name="amount">$XXXXX</string>
     <string name="modify">Modify</string>
     <string name="reason">Tell yourself: Why I save? For what?
         Think about the benefits and the bad things that may happen if you don´t save for a certain goal.
@@ -32,7 +33,7 @@
     <string name="verifyInput">Verify the empty inputs </string>
     <string name="zero">0</string>
     <string name="why">Why I do this?</string>
-    <string name="need">You need:</string>
+    <string name="In">In:</string>
     <string name="update">Update</string>
     <string name="cancel">Cancel</string>
     <string name="value">Insert value</string>
@@ -49,7 +50,7 @@
     <string name="need_key">NEED_KEY</string>
     <string name="time_key">TIME_KEY</string>
     <string name="motivationText">Insert your motivation text</string>
-    <string name="addNewTask">Add a new task</string>
+    <string name="addNewTask">Add new task</string>
     <string name="taskCreated">Your Task have been created!</string>
 
 

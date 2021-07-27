@@ -12,7 +12,4 @@ class Task(title: String, priority: String) {
     var priority: String = priority
 
 
-
-
-
 }

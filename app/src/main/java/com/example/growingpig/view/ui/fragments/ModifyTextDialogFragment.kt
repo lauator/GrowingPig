@@ -22,10 +22,10 @@ class ModifyTextDialogFragment : DialogFragment() {
 
             builder.setView(view)
 
-                .setPositiveButton(R.string.update){_,_ ->
+                .setPositiveButton(R.string.update) { _, _ ->
                     val etText = binding.tvValue.text.toString()
 
-                    parentFragmentManager.setFragmentResult("textKey", bundleOf("text" to etText ))
+                    parentFragmentManager.setFragmentResult("textKey", bundleOf("text" to etText))
 
 
 
@@ -33,7 +33,7 @@ class ModifyTextDialogFragment : DialogFragment() {
 
                 }
 
-                .setNegativeButton(R.string.cancel){_,_ ->
+                .setNegativeButton(R.string.cancel) { _, _ ->
 
                     dialog?.cancel()
 
@@ -42,7 +42,7 @@ class ModifyTextDialogFragment : DialogFragment() {
             builder.create()
 
 
-        }?: throw IllegalStateException("Activity cannot be null")
+        } ?: throw IllegalStateException("Activity cannot be null")
 
     }
 

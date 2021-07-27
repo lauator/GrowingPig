@@ -32,13 +32,18 @@
 
     </style>
 
-
-    
-
     
     <style name="toolbar" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:textColorPrimary">@color/black</item>
     </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+
+        
+    </style>
+
+
 
 
 </resources>

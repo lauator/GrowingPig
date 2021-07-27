@@ -7,11 +7,10 @@ import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import com.squareup.picasso.Picasso
 
-class ViewPagerAdapter(context: Context, imageUrls : ArrayList<String>): PagerAdapter() {
+class ViewPagerAdapter(context: Context, imageUrls: ArrayList<String>) : PagerAdapter() {
 
     private var context = context
     private var imageUrls = imageUrls
-
 
 
     override fun getCount(): Int {
@@ -19,7 +18,7 @@ class ViewPagerAdapter(context: Context, imageUrls : ArrayList<String>): PagerAd
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
-       return view == `object`
+        return view == `object`
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {

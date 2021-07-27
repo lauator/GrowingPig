@@ -8,8 +8,8 @@ import com.example.growingpig.R
 import com.example.growingpig.databinding.ActivityMainBinding
 
 
-
 class MainActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,14 +19,9 @@ class MainActivity : AppCompatActivity() {
         val bnvMenu = binding.bnvMenu
         val navController = findNavController(R.id.fragment)
 
-
         bnvMenu.setupWithNavController(navController)
 
     }
-
-
-
-
 
 
 }

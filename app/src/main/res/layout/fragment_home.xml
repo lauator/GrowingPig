@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,131 +10,124 @@
     tools:context=".view.ui.fragments.HomeFragment">
 
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="1"
-            >
-
-            <LinearLayout
-                android:id="@+id/ll_text"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.38"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/hello"
-                        android:textSize="24sp"
-                        android:layout_weight="0.1"
-                    />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="24sp"
-                        android:layout_weight="0.9"
-                        android:textStyle="bold"
-                        />
-
-
-                </LinearLayout>
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/headerHomeFragment"
-                        android:textSize="@dimen/header"
-                        android:layout_marginBottom="13dp"
-                        android:layout_marginTop="10dp"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1"
-                        android:layout_marginBottom="13dp"
-                    >
-                
-                        <TextView
-                            android:id="@+id/subtitle"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/wantHomeFragment"
-                            android:textSize="@dimen/want"
-                            android:layout_weight="0.5"
-                        />
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.5"
-                            />
-
-            </LinearLayout>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sacrificeFragment"
-                    android:textSize="24sp"
-                    />
+    <EditText
+        android:id="@+id/et_priority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/btn_addTask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.62"
-
-            >
-
-            <!---ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                /-->
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-
-            />
-
-        </RelativeLayout>
-
-        </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_List"
+        android:layout_width="411dp"
+        android:layout_height="380dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/floating_action_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom|end"
-    android:layout_margin="16dp"
-    android:contentDescription="@string/addNewTask"
-    app:srcCompat= "@drawable/ic_add"
+    <TextView
+        android:id="@+id/tv_fragmentNeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/In"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_sacrifice"
+        app:layout_constraintEnd_toStartOf="@+id/tv_zero"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        />
+
+    <TextView
+        android:id="@+id/tv_zero"
+        android:layout_width="14dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/zero"
+
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_sacrifice"
+        app:layout_constraintEnd_toStartOf="@+id/tv_months"
+        app:layout_constraintStart_toEndOf="@id/tv_fragmentNeed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <TextView
+        android:id="@+id/tv_months"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:text="@string/months"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_sacrifice"
+        app:layout_constraintEnd_toStartOf="@+id/tv_headerFragment"
+        app:layout_constraintStart_toEndOf="@+id/tv_zero"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35"
+        />
+
+    <TextView
+        android:id="@+id/tv_headerFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+
+        android:layout_marginEnd="16dp"
 
 
-    />
+        android:freezesText="false"
+        android:text="@string/headerHomeFragment"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_sacrifice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_months"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <TextView
+        android:id="@+id/tv_sacrifice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:text="@string/sacrificeFragment"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/et_priority"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_addTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addNewTask"
+        app:layout_constraintBottom_toTopOf="@+id/rv_List"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
