@@ -5,30 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import com.example.growingpig.R
+import com.example.growingpig.databinding.FragmentMotivationBinding
+import com.example.growingpig.view.adapter.ViewPagerAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MotivationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MotivationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class MotivationFragment : Fragment(), Dialog {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentMotivationBinding
+
+    private lateinit var btnModifyText: Button
+
+    private lateinit var tvTextMotivation: TextView
+
+    private val imageUrls =
+        arrayListOf(
+            "https://images.pexels.com/photos/3077882/pexels-photo-3077882.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+            "https://images.pexels.com/photos/584179/pexels-photo-584179.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        )
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +35,42 @@ class MotivationFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_motivation, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MotivationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MotivationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentMotivationBinding.bind(view)
+
+
+        btnModifyText = binding.btnTextModify
+        tvTextMotivation = binding.tvMotivation
+
+        val viewPager = binding.viewPager
+        val viewPagerAdapter = ViewPagerAdapter(requireActivity().applicationContext, imageUrls)
+        viewPager.adapter = viewPagerAdapter
+
+
+
+        btnModifyText.setOnClickListener {
+            modifyText()
+        }
+
     }
+
+
+    private fun modifyText() {
+        showDialog()
+        childFragmentManager.setFragmentResultListener(
+            "textKey",
+            this.viewLifecycleOwner
+        ) { _, bundle ->
+            tvTextMotivation.text = bundle.getString("text", "")
+        }
+    }
+
+    override fun showDialog() {
+        val dialog = ModifyTextDialogFragment()
+        dialog.show(childFragmentManager, "ModifyTextDialogFragment")
+    }
+
+
 }

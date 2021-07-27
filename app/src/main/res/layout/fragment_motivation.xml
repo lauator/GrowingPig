@@ -13,24 +13,12 @@
         android:orientation="vertical"
         >
 
-        <androidx.cardview.widget.CardView
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
-            app:cardElevation="0dp"
-
-            >
-
-                <ImageView
-                    android:id="@+id/iv_motivationPhoto"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
-
-
-
-
-        </androidx.cardview.widget.CardView>
+            />
 
 
 
@@ -43,6 +31,7 @@
 
 
             <TextView
+                android:id="@+id/tv_motivation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/motivation"
@@ -52,6 +41,7 @@
             </TextView>
 
              <Button
+                 android:id="@+id/btn_textModify"
                  android:layout_width="match_parent"
                  android:layout_height="60dp"
                  android:layout_margin="40dp"

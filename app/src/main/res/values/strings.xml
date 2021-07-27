@@ -2,12 +2,13 @@
     <string name="app_name">GrowingPig</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="headerHomeFragment">You need xxxxx to achieve your goal. Everyday is a progress. Good luck!</string>
+    <string name="headerHomeFragment"> you will reach your goal </string>
+    <string name="goodLuck">Everyday is a progress. Good luck!</string>
     <string name="wantHomeFragment">I want a/an: </string>
     <string name="sacrificeFragment">Things you are willing to sacrifice today:</string>
     <string name="savings">Savings</string>
+    <string name="need">Need</string>
     <string name="goal">Goal</string>
-    <string name="amount">$XXXXX</string>
     <string name="modify">Modify</string>
     <string name="reason">Tell yourself: Why I save? For what?
         Think about the benefits and the bad things that may happen if you don´t save for a certain goal.
@@ -29,4 +30,28 @@
     <string name="keepConnect">Keep Connect</string>
     <string name="newTask">New Task</string>
     <string name="hello">Hello </string>
+    <string name="verifyInput">Verify the empty inputs </string>
+    <string name="zero">0</string>
+    <string name="why">Why I do this?</string>
+    <string name="In">In:</string>
+    <string name="update">Update</string>
+    <string name="cancel">Cancel</string>
+    <string name="value">Insert value</string>
+    <string name="currencySymbol">$</string>
+    <string name="condition">If you add all your balance to your savings, in:</string>
+    <string name="months">months</string>
+    <string name="reach"> You will reach your goal!</string>
+    <string name="preference_file_key">com.example.growingpig.PREFERENCE_FILE_KEY</string>
+    <string name="income_key">INCOME_KEY</string>
+    <string name="out_goings_key">OUTGOINGS_KEY</string>
+    <string name="balance_key">BALANCE_KEY</string>
+    <string name="savings_key">SAVINGS_KEY</string>
+    <string name="goal_key">GOAL_KEY</string>
+    <string name="need_key">NEED_KEY</string>
+    <string name="time_key">TIME_KEY</string>
+    <string name="motivationText">Insert your motivation text</string>
+    <string name="addNewTask">Add new task</string>
+    <string name="taskCreated">Your Task have been created!</string>
+
+
 </resources>
