@@ -20,8 +20,6 @@ import com.google.android.material.textfield.TextInputEditText
 //TODO los metodos de calcular los podria meter en una clase calculadora
 
 
-private lateinit var whyParagraph: TextInputEditText
-
 class ProfileFragment : Fragment(), Dialog {
 
 
@@ -74,7 +72,7 @@ class ProfileFragment : Fragment(), Dialog {
         tvGoalAmount = binding.tvGoalAmount
         tvNeed = binding.tvNeedAmount
         tvTime = binding.tvTime
-        whyParagraph = binding.whyParagraph
+
 
         btnModifyIncome = binding.btnChangeIncomings
         btnModifyOutgoings = binding.btnChangeOutcomings
