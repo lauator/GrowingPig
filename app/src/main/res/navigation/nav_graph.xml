@@ -19,15 +19,7 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/navProgressFragment"
-        android:name="com.example.growingpig.view.ui.fragments.ProgressFragment"
-        android:label="fragment_progress"
-        tools:layout="@layout/fragment_progress" >
-        <action
-            android:id="@+id/action_progressFragment_to_motivationFragment"
-            app:destination="@id/navMotivationFragment" />
-    </fragment>
+
 
     <fragment
         android:id="@+id/navMotivationFragment"
