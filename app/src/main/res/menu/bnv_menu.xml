@@ -6,11 +6,6 @@
     android:icon="@drawable/ic_home"/>
 
     <item
-    android:id="@+id/navProgressFragment"
-    android:title="Progress"
-    android:icon="@drawable/ic_progress"/>
-
-    <item
     android:id="@+id/navMotivationFragment"
     android:title="Motivation"
     android:icon="@drawable/ic_fire"/>
